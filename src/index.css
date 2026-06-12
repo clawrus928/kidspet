@@ -1,0 +1,632 @@
+/* 寵物樂園 — 兒童友善的繽紛樣式 */
+:root {
+  --purple: #a78bfa;
+  --purple-dark: #7c5cd6;
+  --pink: #ff6b81;
+  --orange: #ff9f43;
+  --blue: #54a0ff;
+  --green: #2ecc71;
+  --red: #ff4d4f;
+  --text: #3d3354;
+  --text-light: #8a80a0;
+  --bg: linear-gradient(160deg, #fdf3ff 0%, #eef4ff 55%, #f0fff6 100%);
+  --card: #ffffff;
+  --radius: 20px;
+  --shadow: 0 6px 20px rgba(120, 90, 200, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 12px 16px 48px;
+}
+
+/* ===== 頂欄 ===== */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0 16px;
+}
+
+.brand {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--purple-dark);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge-local {
+  font-size: 0.72rem;
+  background: #fff3cd;
+  color: #8a6d00;
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+.dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  margin-left: 6px;
+  border-radius: 999px;
+  background: var(--red);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0 5px;
+}
+
+/* ===== 按鈕 ===== */
+.btn {
+  border: none;
+  border-radius: 14px;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s, opacity 0.2s;
+  font-family: inherit;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--purple);
+  color: #fff;
+  box-shadow: 0 4px 0 var(--purple-dark);
+}
+
+.btn-pink {
+  background: var(--pink);
+  color: #fff;
+  box-shadow: 0 4px 0 #d44a5e;
+}
+
+.btn-danger {
+  background: #ffe5e5;
+  color: var(--red);
+}
+
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--text);
+  border: 2px solid #e8e2f5;
+}
+
+.btn-lg {
+  font-size: 1.1rem;
+  padding: 14px 22px;
+  border-radius: 18px;
+}
+
+/* ===== 載入/空狀態 ===== */
+.loading-screen,
+.empty-state {
+  text-align: center;
+  padding-top: 18vh;
+}
+
+.big-emoji {
+  font-size: 5rem;
+}
+
+.empty-hint {
+  text-align: center;
+  color: var(--text-light);
+  padding: 40px 0;
+}
+
+.hint {
+  text-align: center;
+  color: var(--orange);
+  font-weight: 700;
+}
+
+/* ===== 選人頁 ===== */
+.picker-title {
+  text-align: center;
+  color: var(--purple-dark);
+}
+
+.kid-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+}
+
+.kid-card {
+  background: var(--card);
+  border: 3px solid transparent;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s;
+  font-family: inherit;
+  color: var(--text);
+}
+
+.kid-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--purple);
+}
+
+.kid-avatar {
+  font-size: 3rem;
+}
+
+.kid-name {
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin-top: 6px;
+}
+
+.kid-points {
+  color: var(--orange);
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.kid-pet {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+/* ===== 小孩主畫面 ===== */
+.kid-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.kid-header-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+}
+
+.kid-avatar-sm {
+  font-size: 1.6rem;
+}
+
+.points-pill {
+  background: #fff8e6;
+  border: 2px solid #ffe1a1;
+  color: #b07d00;
+  font-weight: 800;
+  border-radius: 999px;
+  padding: 8px 14px;
+}
+
+/* ===== 分頁 ===== */
+.tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+}
+
+.tab {
+  flex: 1;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.7);
+  border: 2px solid transparent;
+  border-radius: 14px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-light);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.tab.active {
+  background: #fff;
+  color: var(--purple-dark);
+  border-color: var(--purple);
+  box-shadow: var(--shadow);
+}
+
+/* ===== 寵物區 ===== */
+.pet-zone {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  text-align: center;
+}
+
+.pet-stage-label {
+  display: inline-block;
+  background: #f0eaff;
+  color: var(--purple-dark);
+  font-weight: 700;
+  font-size: 0.85rem;
+  border-radius: 999px;
+  padding: 4px 14px;
+}
+
+.pet-display {
+  position: relative;
+  padding: 18px 0 6px;
+}
+
+.pet-emoji {
+  font-size: 6.5rem;
+  display: inline-block;
+}
+
+.pet-fx {
+  position: absolute;
+  top: 8px;
+  right: 28%;
+  font-size: 2.2rem;
+  animation: float-up 0.9s ease-out forwards;
+}
+
+@keyframes float-up {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+}
+
+.bounce {
+  animation: bounce 2.4s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.sad-wobble {
+  animation: wobble 1.6s ease-in-out infinite;
+  filter: saturate(0.6);
+}
+
+@keyframes wobble {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+
+.pet-name-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.pet-name {
+  font-size: 1.3rem;
+}
+
+.pet-mood {
+  color: var(--text-light);
+}
+
+.meters {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.meter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.meter-label {
+  width: 76px;
+  text-align: right;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.meter-track {
+  flex: 1;
+  height: 14px;
+  background: #f0edf7;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.meter-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.4s;
+}
+
+.meter-value {
+  width: 32px;
+  font-size: 0.82rem;
+  color: var(--text-light);
+}
+
+.pet-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ===== 清單卡片 ===== */
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--card);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 12px 14px;
+}
+
+.item-icon {
+  font-size: 1.9rem;
+}
+
+.item-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.item-title {
+  font-weight: 700;
+}
+
+.item-sub {
+  font-size: 0.82rem;
+  color: var(--text-light);
+}
+
+.status-chip {
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 6px 12px;
+  white-space: nowrap;
+}
+
+.status-chip.waiting {
+  background: #fff3cd;
+  color: #8a6d00;
+}
+
+.status-chip.done {
+  background: #e3f9ec;
+  color: var(--green);
+}
+
+.review-buttons {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+/* ===== 家長面板 ===== */
+.parent-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.parent-header h2 {
+  margin: 8px 0;
+}
+
+.form-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-card h3 {
+  margin: 0;
+}
+
+.form-hint {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.form-card input {
+  border: 2px solid #e8e2f5;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 1rem;
+  font-family: inherit;
+  width: 100%;
+}
+
+.form-card input:focus {
+  outline: none;
+  border-color: var(--purple);
+}
+
+.number-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+}
+
+.number-row input {
+  width: 120px;
+}
+
+.emoji-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.emoji-pick {
+  font-size: 1.5rem;
+  background: #f6f3fc;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.emoji-pick.active {
+  border-color: var(--purple);
+  background: #fff;
+}
+
+/* ===== PIN 視窗 ===== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(60, 40, 100, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.pin-dialog {
+  background: #fff;
+  border-radius: 24px;
+  padding: 24px 28px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.pin-dialog h3 {
+  margin: 0 0 14px;
+}
+
+.pin-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.pin-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--purple);
+}
+
+.pin-dot.filled {
+  background: var(--purple);
+}
+
+.pin-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 64px);
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.pin-key {
+  height: 56px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 16px;
+  background: #f3effc;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.pin-key:active {
+  background: var(--purple);
+  color: #fff;
+}
+
+.shake {
+  animation: shake 0.4s;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+}
+
+@media (max-width: 480px) {
+  .item-card {
+    flex-wrap: wrap;
+  }
+
+  .review-buttons {
+    width: 100%;
+  }
+}
