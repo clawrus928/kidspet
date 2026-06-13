@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { AppData, ParentActions, PetSpecies } from '../types'
 import { SPECIES } from '../game'
-import { cloudEnabled, getFamilyCode, setFamilyCode } from '../storage'
+import { getFamilyCode, setFamilyCode } from '../storage'
 
 interface Props {
   data: AppData
@@ -357,40 +357,32 @@ function SettingsTab({ data, actions }: { data: AppData; actions: ParentActions 
       </div>
 
       <div className="form-card">
-        <h3>☁️ 雲端同步</h3>
-        {cloudEnabled ? (
-          <>
-            <p className="form-hint">
-              已連線雲端。換手機或多裝置共用時,在新裝置首頁點「📲 輸入家庭代碼同步」,輸入下面這組代碼即可。
-            </p>
-            <div className="code-box">
-              <span className="code-value">{getFamilyCode()}</span>
-              <button className="btn btn-ghost" onClick={copyCode}>
-                {copied ? '已複製 ✓' : '複製'}
-              </button>
-            </div>
-            <details className="advanced">
-              <summary>進階:改用其他家庭代碼</summary>
-              <label className="number-row">
-                家庭代碼:
-                <input value={code} onChange={(e) => setCode(e.target.value.toUpperCase())} />
-              </label>
-              <button
-                className="btn btn-primary"
-                onClick={() => {
-                  setFamilyCode(code)
-                  location.reload()
-                }}
-              >
-                儲存並重新載入
-              </button>
-            </details>
-          </>
-        ) : (
-          <p className="form-hint">
-            目前是本機模式,資料只存在這台裝置。要啟用多裝置同步,請依照專案 README 設定 Supabase 環境變數後重新部署。
-          </p>
-        )}
+        <h3>📲 多裝置同步</h3>
+        <p className="form-hint">
+          換手機或多裝置共用時,在新裝置首頁點「📲 輸入家庭代碼同步」,輸入下面這組代碼即可。
+        </p>
+        <div className="code-box">
+          <span className="code-value">{getFamilyCode()}</span>
+          <button className="btn btn-ghost" onClick={copyCode}>
+            {copied ? '已複製 ✓' : '複製'}
+          </button>
+        </div>
+        <details className="advanced">
+          <summary>進階:改用其他家庭代碼</summary>
+          <label className="number-row">
+            家庭代碼:
+            <input value={code} onChange={(e) => setCode(e.target.value.toUpperCase())} />
+          </label>
+          <button
+            className="btn btn-primary"
+            onClick={() => {
+              setFamilyCode(code)
+              location.reload()
+            }}
+          >
+            儲存並重新載入
+          </button>
+        </details>
       </div>
     </section>
   )

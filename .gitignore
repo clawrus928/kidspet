@@ -17,6 +17,9 @@ dist-ssr
 .env.*
 !.env.example
 
+# 伺服器資料檔(家庭資料,不進版控)
+/data
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

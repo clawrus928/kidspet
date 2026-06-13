@@ -11,7 +11,7 @@ import {
   today,
   uid,
 } from './game'
-import { cloudEnabled, loadData, saveData, subscribeData } from './storage'
+import { loadData, saveData, subscribeData } from './storage'
 import { KidPicker } from './components/KidPicker'
 import { KidView } from './components/KidView'
 import { ParentPanel } from './components/ParentPanel'
@@ -189,11 +189,6 @@ export default function App() {
           🐾 寵物樂園
         </button>
         <div className="topbar-right">
-          {!cloudEnabled && (
-            <span className="badge badge-local" title="尚未設定 Supabase,資料只存在這台裝置">
-              本機模式
-            </span>
-          )}
           <button className="btn btn-ghost" onClick={openParent}>
             👨‍👩‍👧 家長
             {pendingCount > 0 && <span className="dot">{pendingCount}</span>}
