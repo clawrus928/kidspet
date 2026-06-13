@@ -1,14 +1,16 @@
 import type { Kid } from '../types'
 import { SPECIES, petStage, petLevel } from '../game'
+import { cloudEnabled } from '../storage'
 
 interface Props {
   kids: Kid[]
   onPick: (kidId: string) => void
   onParent: () => void
+  onJoin: () => void
 }
 
 /** 首頁:選擇是哪個小朋友 */
-export function KidPicker({ kids, onPick, onParent }: Props) {
+export function KidPicker({ kids, onPick, onParent, onJoin }: Props) {
   if (kids.length === 0) {
     return (
       <main className="picker empty-state">
@@ -18,6 +20,14 @@ export function KidPicker({ kids, onPick, onParent }: Props) {
         <button className="btn btn-primary btn-lg" onClick={onParent}>
           👨‍👩‍👧 進入家長設定
         </button>
+        {cloudEnabled && (
+          <p className="join-hint">
+            已經在其他裝置用過?
+            <button className="link-btn" onClick={onJoin}>
+              📲 輸入家庭代碼同步
+            </button>
+          </p>
+        )}
       </main>
     )
   }

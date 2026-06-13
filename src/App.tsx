@@ -16,6 +16,7 @@ import { KidPicker } from './components/KidPicker'
 import { KidView } from './components/KidView'
 import { ParentPanel } from './components/ParentPanel'
 import { PinDialog } from './components/PinDialog'
+import { JoinFamilyDialog } from './components/JoinFamilyDialog'
 
 type View = { name: 'picker' } | { name: 'kid'; kidId: string } | { name: 'parent' }
 
@@ -24,6 +25,7 @@ export default function App() {
   const [loaded, setLoaded] = useState(false)
   const [view, setView] = useState<View>({ name: 'picker' })
   const [askPin, setAskPin] = useState(false)
+  const [joining, setJoining] = useState(false)
 
   // 載入資料 + 訂閱雲端同步
   useEffect(() => {
@@ -204,6 +206,7 @@ export default function App() {
           kids={data.kids.map((k) => ({ ...k, pet: tickPet(k.pet) }))}
           onPick={(kidId) => setView({ name: 'kid', kidId })}
           onParent={openParent}
+          onJoin={() => setJoining(true)}
         />
       )}
 
@@ -235,6 +238,8 @@ export default function App() {
           onCancel={() => setAskPin(false)}
         />
       )}
+
+      {joining && <JoinFamilyDialog onClose={() => setJoining(false)} />}
     </div>
   )
 }

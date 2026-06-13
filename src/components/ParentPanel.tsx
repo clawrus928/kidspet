@@ -315,6 +315,17 @@ function RewardsTab({ data, actions }: { data: AppData; actions: ParentActions }
 function SettingsTab({ data, actions }: { data: AppData; actions: ParentActions }) {
   const [pin, setPin] = useState('')
   const [code, setCode] = useState(getFamilyCode())
+  const [copied, setCopied] = useState(false)
+
+  function copyCode() {
+    navigator.clipboard?.writeText(getFamilyCode()).then(
+      () => {
+        setCopied(true)
+        setTimeout(() => setCopied(false), 1500)
+      },
+      () => {},
+    )
+  }
 
   return (
     <section>
@@ -350,21 +361,30 @@ function SettingsTab({ data, actions }: { data: AppData; actions: ParentActions 
         {cloudEnabled ? (
           <>
             <p className="form-hint">
-              已連線 Supabase。在其他裝置輸入同一組「家庭代碼」即可同步資料。
+              已連線雲端。換手機或多裝置共用時,在新裝置首頁點「📲 輸入家庭代碼同步」,輸入下面這組代碼即可。
             </p>
-            <label className="number-row">
-              家庭代碼:
-              <input value={code} onChange={(e) => setCode(e.target.value)} />
-            </label>
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                setFamilyCode(code)
-                location.reload()
-              }}
-            >
-              儲存並重新載入
-            </button>
+            <div className="code-box">
+              <span className="code-value">{getFamilyCode()}</span>
+              <button className="btn btn-ghost" onClick={copyCode}>
+                {copied ? '已複製 ✓' : '複製'}
+              </button>
+            </div>
+            <details className="advanced">
+              <summary>進階:改用其他家庭代碼</summary>
+              <label className="number-row">
+                家庭代碼:
+                <input value={code} onChange={(e) => setCode(e.target.value.toUpperCase())} />
+              </label>
+              <button
+                className="btn btn-primary"
+                onClick={() => {
+                  setFamilyCode(code)
+                  location.reload()
+                }}
+              >
+                儲存並重新載入
+              </button>
+            </details>
           </>
         ) : (
           <p className="form-hint">
