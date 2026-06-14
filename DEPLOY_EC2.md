@@ -80,9 +80,13 @@ curl -s -X PUT http://localhost:3000/api/family/PET-DEPLOYTEST \
 
 # 讀回應看到剛剛的資料
 curl -s http://localhost:3000/api/family/PET-DEPLOYTEST
+
+# 確認版本(也會顯示在 App 畫面最底)
+curl -s http://localhost:3000/api/version
 ```
 
 讀回若包含 `"name":"測試"` 即代表前後端與存檔都正常。
+App 畫面最底會顯示「🐾 寵物樂園 v1.0.0 · <git短碼>」,可用來確認跑的是哪一版。
 
 ## 步驟 6:開放對外連線
 
@@ -121,7 +125,10 @@ git pull origin claude/progress-check-5n6gzi
 npm install
 npm run build
 pm2 restart kidspet
+curl -s http://localhost:3000/api/version   # 確認版本已更新
 ```
+
+> 畫面最底的版本號會顯示 `v<版本> · <git短碼>`,git 短碼即當下部署的 commit,可確認是否已是最新。
 
 ## 資料與備份
 

@@ -17,6 +17,7 @@ import { KidView } from './components/KidView'
 import { ParentPanel } from './components/ParentPanel'
 import { PinDialog } from './components/PinDialog'
 import { JoinFamilyDialog } from './components/JoinFamilyDialog'
+import { BUILD_TIME, VERSION_LABEL } from './version'
 
 type View = { name: 'picker' } | { name: 'kid'; kidId: string } | { name: 'parent' }
 
@@ -235,6 +236,10 @@ export default function App() {
       )}
 
       {joining && <JoinFamilyDialog onClose={() => setJoining(false)} />}
+
+      <footer className="app-version" title={`Build ${BUILD_TIME}`}>
+        🐾 寵物樂園 {VERSION_LABEL}
+      </footer>
     </div>
   )
 }

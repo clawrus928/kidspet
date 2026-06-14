@@ -4,12 +4,20 @@
 // 資料只存在一個 JSON 檔,不需安裝任何資料庫。適合在 EC2 等小型主機跑。
 import express from 'express'
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises'
-import { existsSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '..')
+
+// 版本號(讀自 package.json),方便確認執行中的是哪一版
+let VERSION = '0.0.0'
+try {
+  VERSION = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8')).version
+} catch {
+  /* 找不到則用預設 */
+}
 
 const PORT = Number(process.env.PORT) || 3000
 const DATA_FILE = process.env.DATA_FILE || join(ROOT, 'data', 'families.json')
@@ -57,6 +65,11 @@ app.use(express.json({ limit: '4mb' }))
 
 const CODE_RE = /^[A-Z0-9-]{1,32}$/
 
+// 版本資訊(可用 curl /api/version 確認部署版本)
+app.get('/api/version', (_req, res) => {
+  res.json({ version: VERSION })
+})
+
 // 讀取某家庭的資料
 app.get('/api/family/:code', (req, res) => {
   const code = String(req.params.code).toUpperCase()
@@ -94,6 +107,6 @@ app.use((_req, res) => {
 
 await loadStore()
 app.listen(PORT, () => {
-  console.log(`🐾 寵物樂園伺服器已啟動:http://0.0.0.0:${PORT}`)
+  console.log(`🐾 寵物樂園伺服器已啟動 v${VERSION}:http://0.0.0.0:${PORT}`)
   console.log(`   資料檔:${DATA_FILE}`)
 })
