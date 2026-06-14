@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "server": "node server/index.mjs",
-    "start": "npm run build && node server/index.mjs"
+    "start": "npm run build && node server/index.mjs",
+    "deploy": "bash deploy.sh"
   },
   "dependencies": {
     "express": "^5.2.1",
