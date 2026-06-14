@@ -1,6 +1,8 @@
 import type { Kid } from '../types'
 import { SPECIES, petStage, petLevel } from '../game'
 import { cloudEnabled } from '../storage'
+import { avatarImage, petImage } from '../sprites'
+import { Sprite } from './Sprite'
 
 interface Props {
   kids: Kid[]
@@ -40,11 +42,14 @@ export function KidPicker({ kids, onPick, onParent, onJoin }: Props) {
           const stage = petStage(kid.pet.xp)
           return (
             <button key={kid.id} className="kid-card" onClick={() => onPick(kid.id)}>
-              <div className="kid-avatar">{kid.avatar}</div>
+              <div className="kid-avatar">
+                <Sprite src={avatarImage(kid.avatar)} emoji={kid.avatar} />
+              </div>
               <div className="kid-name">{kid.name}</div>
               <div className="kid-points">⭐ {kid.points} 分</div>
               <div className="kid-pet">
-                {SPECIES[kid.pet.species].stages[stage]} {kid.pet.name} · Lv.{petLevel(kid.pet.xp)}
+                <Sprite src={petImage(kid.pet.species, stage)} emoji={SPECIES[kid.pet.species].stages[stage]} />{' '}
+                {kid.pet.name} · Lv.{petLevel(kid.pet.xp)}
               </div>
             </button>
           )

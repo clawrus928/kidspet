@@ -2,6 +2,8 @@ import { useState } from 'react'
 import type { AppData, ParentActions, PetSpecies } from '../types'
 import { SPECIES } from '../game'
 import { getFamilyCode, setFamilyCode } from '../storage'
+import { avatarImage, petImage } from '../sprites'
+import { Sprite } from './Sprite'
 
 interface Props {
   data: AppData
@@ -138,7 +140,7 @@ function KidsTab({ data, actions }: { data: AppData; actions: ParentActions }) {
       <div className="card-list">
         {data.kids.map((k) => (
           <div key={k.id} className="item-card">
-            <span className="item-icon">{k.avatar}</span>
+            <Sprite src={avatarImage(k.avatar)} emoji={k.avatar} className="item-icon" />
             <div className="item-body">
               <div className="item-title">
                 {k.name} · ⭐{k.points}
@@ -173,7 +175,7 @@ function KidsTab({ data, actions }: { data: AppData; actions: ParentActions }) {
         <div className="emoji-row">
           {AVATARS.map((a) => (
             <button key={a} className={a === avatar ? 'emoji-pick active' : 'emoji-pick'} onClick={() => setAvatar(a)}>
-              {a}
+              <Sprite src={avatarImage(a)} emoji={a} />
             </button>
           ))}
         </div>
@@ -186,7 +188,7 @@ function KidsTab({ data, actions }: { data: AppData; actions: ParentActions }) {
               title={SPECIES[s].label}
               onClick={() => setSpecies(s)}
             >
-              {SPECIES[s].stages[1]}
+              <Sprite src={petImage(s, 1)} emoji={SPECIES[s].stages[1]} />
             </button>
           ))}
         </div>

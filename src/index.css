@@ -711,6 +711,17 @@ body {
   margin-top: 10px;
 }
 
+/* ===== 圖片 sprite(沿用 emoji 的 font-size 尺寸,圖檔缺失時自動退回 emoji)===== */
+.sprite {
+  width: 1em;
+  height: 1em;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 /* ===== 版本號 ===== */
 .app-version {
   text-align: center;

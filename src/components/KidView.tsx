@@ -11,6 +11,8 @@ import {
   today,
   xpProgress,
 } from '../game'
+import { avatarImage, petImage } from '../sprites'
+import { Sprite } from './Sprite'
 
 interface Props {
   kid: Kid
@@ -43,7 +45,7 @@ export function KidView({ kid, data, actions, onBack }: Props) {
           ← 換人
         </button>
         <div className="kid-header-info">
-          <span className="kid-avatar-sm">{kid.avatar}</span>
+          <Sprite src={avatarImage(kid.avatar)} emoji={kid.avatar} className="kid-avatar-sm" />
           <strong>{kid.name}</strong>
         </div>
         <div className="points-pill">⭐ {kid.points}</div>
@@ -67,9 +69,11 @@ export function KidView({ kid, data, actions, onBack }: Props) {
             {STAGE_NAMES[stage]}期 · Lv.{level}
           </div>
           <div className="pet-display">
-            <span className={`pet-emoji ${pet.hunger < 25 || pet.happiness < 25 ? 'sad-wobble' : 'bounce'}`}>
-              {SPECIES[pet.species].stages[stage]}
-            </span>
+            <Sprite
+              src={petImage(pet.species, stage)}
+              emoji={SPECIES[pet.species].stages[stage]}
+              className={`pet-emoji ${pet.hunger < 25 || pet.happiness < 25 ? 'sad-wobble' : 'bounce'}`}
+            />
             {fx && <span className="pet-fx">{fx}</span>}
           </div>
           <div className="pet-name-row">
