@@ -14,8 +14,8 @@ echo "→ 3/4 build 前端…"
 npm run build
 
 echo "→ 4/4 重啟伺服器…"
-# 已在跑就 restart,未跑過就第一次 start
-pm2 restart kidspet 2>/dev/null || pm2 start server/index.mjs --name kidspet
+# 依 ecosystem.config.cjs 啟動或重啟(已在跑就 reload,未跑過就第一次 start)
+pm2 startOrReload ecosystem.config.cjs --update-env
 pm2 save >/dev/null 2>&1 || true
 
 echo ""

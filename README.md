@@ -44,6 +44,10 @@ npm run dev
 4. 在「⚙️ 設定」分頁設定 4 位數家長 PIN 碼
 5. 回到首頁讓小孩選擇自己的頭像開始玩!
 
+## ☁️ 部署到騰訊雲輕量伺服器(建議)
+
+完整步驟見 [`DEPLOY_TENCENT.md`](DEPLOY_TENCENT.md):nginx 在 80 埠轉發、pm2 常駐(設定在 `ecosystem.config.cjs`)、目錄與埠號按「一台主機放多個專案」規劃。
+
 ## 🌐 部署到 EC2(或任何 Linux 主機)
 
 ```bash
